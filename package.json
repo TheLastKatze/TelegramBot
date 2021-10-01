@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@splinterlands/hive-interface": "^2.2.5",
     "dotenv": "^10.0.0",
+    "mysql": "^2.18.1",
     "node-fetch": "^2.6.1",
     "telegraf": "^3.39.0"
   },

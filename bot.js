@@ -1,6 +1,8 @@
 const { Telegraf, Markup } = require('telegraf')
 const fetch = require('node-fetch')
 const { rewardRunner } = require('./rewards')
+const { transfer } = require('./transfer')
+const { spawn } = require("child_process");
 
 const bot = new Telegraf('2033196790:AAGbrvOtOstVAMwDxC3l-UBGJlKUpkuLe5M')
 
@@ -39,6 +41,12 @@ bot.hears(['dec', 'DEC', 'Dec'], async (ctx) => {
     ctx.reply(contenido)
 })
 
+bot.hears(['transfer'], async (ctx) => {
+    
+    await transfer();
+    ctx.reply("Transfer should be completed.")
+})
+
 bot.hears(['rank', 'Rank', 'rate', 'Rate'], async (ctx) => {
 
     var cnt = '';
@@ -54,7 +62,7 @@ bot.hears(['rank', 'Rank', 'rate', 'Rate'], async (ctx) => {
         let wins = parseFloat(season_details.wins);
         let battles = parseFloat(season_details.battles);
         let win_rate = parseFloat(wins / battles);
-        win_rate = await win_rate.toFixed(3)*100;
+        win_rate = await win_rate.toFixed(3) * 100;
         win_rate = await win_rate.toFixed(3)
         cnt = cnt + cuenta + '\t\t\t R' + rank + ' - ' + win_rate + '%' + '\n';
     }
