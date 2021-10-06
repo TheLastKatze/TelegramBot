@@ -4,8 +4,8 @@ async function getRewardHistory(player = "") {
   var rH;
   rH = await fetch(
     "https://api.steemmonsters.io/players/history?username=" +
-      player +
-      "&from_block=-1&limit=30&types=claim_reward"
+    player +
+    "&from_block=-1&limit=30&types=claim_reward"
   )
     .then((response) => {
       if (!response.ok) {
@@ -57,6 +57,7 @@ function calculate_rewards(rewardsJson, type, date, user) {
     potion_alc_amount: 0,
     potion_leg_amount: 0,
     card_amount: 0,
+    credits: 0
   }
 
   for (let index = 0; index < rewardsJson.length; index++) {
@@ -68,28 +69,32 @@ function calculate_rewards(rewardsJson, type, date, user) {
         data.dec_amount = data.dec_amount + element.quantity;
         break;
       case "reward_card":
-        data.card_amount =  data.card_amount + 1;
+        data.card_amount = data.card_amount + 1;
         break;
       case "potion":
         let potion_type = element.potion_type;
-        if(potion_type === "legendary"){
-            data.potion_leg_amount =  data.potion_leg_amount + 1;
-        }else{
-            data.potion_alc_amount =  data.potion_alc_amount + 1;
+        if (potion_type === "legendary") {
+          data.potion_leg_amount = data.potion_leg_amount + 1;
+        } else {
+          data.potion_alc_amount = data.potion_alc_amount + 1;
         }
+        break;
+      case "credits":
+        data.credits = data.credits + element.quantity
         break;
     }
   }
 
   var reward = 'Last reward from ' + date.split(',')[0] + '\n';
 
-  if ( data.dec_amount != 0){ reward += 'Dec: ' + data.dec_amount }
-  if ( data.card_amount != 0){ reward += 'Cards: ' + data.card_amount }
-  if ( data.potion_leg_amount != 0){ reward += 'Legendary Potions: ' + data.potion_leg_amount }
-  if ( data.potion_alc_amount != 0){ reward += 'Alchemy Potions: ' + data.potion_alc_amount }
+  if (data.dec_amount != 0) { reward += 'Dec: ' + data.dec_amount }
+  if (data.card_amount != 0) { reward += 'Cards: ' + data.card_amount }
+  if (data.potion_leg_amount != 0) { reward += 'Legendary Potions: ' + data.potion_leg_amount }
+  if (data.potion_alc_amount != 0) { reward += 'Alchemy Potions: ' + data.potion_alc_amount }
+  if (data.credits != 0) { reward += 'Credits: ' + data.credits }
 
   console.log("-----------------");
-  console.log(type+ " Rewards - "+date + " - user: "+user);
+  console.log(type + " Rewards - " + date + " - user: " + user);
   console.log(data);
   return reward;
 }

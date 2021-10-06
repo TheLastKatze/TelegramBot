@@ -13,7 +13,10 @@ bot.start((ctx) => {
         + 'account-name: Last reward from that account')
 })
 
-const cuentas = ['lost-katze', 'mirage-mage', 'alpaca-pacalt', 'alpaca-gold-0000', 'alpaca-gold-0001', 'alpaca-gold-0002', 'alpaca-gold-0003', 'alpaca-gold-0004']
+const cuentas = ['lost-katze', 'mirage-mage', 'alpaca-pacalt', 'alpaca-gold-0000', 'alpaca-gold-0001', 'alpaca-gold-0002'
+, 'alpaca-gold-0003', 'alpaca-gold-0004', 'alpaca-gold-0005', 'alpaca-gold-0006', 'alpaca-gold-0007', 'alpaca-gold-0008', 'alpaca-gold-0009'
+, 'alpaca-gold-0010', 'alpaca-gold-0011', 'alpaca-gold-0012', 'alpaca-gold-0013', 'alpaca-gold-0014', 'alpaca-gold-0015', 'alpaca-gold-0016'
+, 'alpaca-gold-0017', 'alpaca-gold-0018', 'alpaca-gold-0019']
 
 bot.hears(['dec', 'DEC', 'Dec'], async (ctx) => {
 
